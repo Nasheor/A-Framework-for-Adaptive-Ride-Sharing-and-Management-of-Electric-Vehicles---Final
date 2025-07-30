@@ -1,0 +1,260 @@
+%\documentclass[a4paper, 12pt, oneside, numbered, print, index, custombib, custommargin, chapter]{Classes/PhDThesisPSnPDF}  % chapter mode
+\documentclass[a4paper, 12pt, oneside, numbered, print, index, custombib, custommargin]{Classes/PhDThesisPSnPDF} % whole document
+
+\input{Preamble/preamble}
+\input{thesis-info}
+
+\ifdefineAbstract
+ \pagestyle{empty}
+ \includeonly{declaration, abstract}
+\fi
+
+% ***************************** Chapter Mode ***********************************
+% The chapter mode allows user to only print particular chapters with references
+% Title, Contents, Frontmatter are disabled by default
+% Useful option to review a particular chapter or to send it to supervisior.
+% To use choose `chapter' option in the document class
+
+\ifdefineChapter
+	\pagestyle{empty}
+ 	\includeonly{
+ 		%dedication,
+ 		%declaration,
+ 		acknowledgement,
+ 		abstract, 
+ 		chapter1,
+ 		chapter2,
+ 		chapter3,
+ 		chapter4,
+ 		chapter5,
+ 		chapter6,
+ 	}
+\fi
+
+
+% ******************************************************************************
+%%%%% Additional packages
+\usepackage{mathtools}%phantom minus in matrix
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{stackengine}
+\usepackage{wrapfig}
+\usepackage{textcase}
+\usepackage{ifthen}
+\usepackage{cases}
+\usepackage{amsmath} % For multline equations
+\usepackage{amsfonts}
+\usepackage{paralist}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{xspace}
+\setlength{\marginparwidth}{2cm} \usepackage{todonotes}
+\usepackage{array}
+\usepackage{balance}
+\usepackage[export]{adjustbox}
+\usepackage[inline]{enumitem}
+\usepackage{soul}
+\usepackage{rotating}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+%\usepackage{showframe}
+%\usepackage{layouts}
+\usepackage{pdfpages}
+\usepackage{acronym}
+\usepackage{nomencl}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{algorithm}
+\usepackage{tabularx}
+\usepackage[noend]{algpseudocode}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{minted}
+\usepackage{adjustbox}
+\usepackage{outlines}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{algorithmicx}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{textcomp}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+
+\newcommand{\pluseq}{\mathrel{+}=} % Define the \pluseq symbol for aggregation
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+%\definecolor{dkgreen}{rgb}{0,0.6,0}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkgreen}{rgb}{0, 0, 0}
+\definecolor{gray}{rgb}{0, 0, 0}
+\definecolor{mauve}{rgb}{0, 0, 0}
+\definecolor{blue}{rgb}{0, 0, 0}
+
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% ******************************************************************************
+%%%%% New commands
+\newcommand{\fakeparagraph}[1]{\vspace{1mm}\noindent\textbf{#1.}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\tabvspc}[1]{\parbox{0pt}{\rule{0pt}{#1ex+\baselineskip}}}
+\newcommand{\rssi}{\ensuremath{\mathit{RSSI}}\xspace}
+\newcommand{\pdr}{\ensuremath{\mathit{PDR}}\xspace}
+\newcommand{\ema}{\ensuremath{\mathit{EMA}}\xspace}
+\newcommand{\dutycycle}{\textit{duty-cycle}\xspace}
+\newcommand{\plr}{\ensuremath{\mathit{PLR}}\xspace}
+\newcommand{\fpr}{\ensuremath{\mathit{FPR}}\xspace}
+\newcommand{\tpr}{\ensuremath{\mathit{TPR}}\xspace}
+\newcommand{\wrt}{w.r.t.\ }
+\renewcommand\theadfont{\bfseries}
+\newcommand{\home}{\textsc{home}\xspace}
+\newcommand{\office}{\textsc{office}\xspace}
+\newcommand{\first}{\textsc{first}\xspace}
+\newcommand{\second}{\textsc{second}\xspace}
+\newcommand{\third}{\textsc{third}\xspace}
+\newcommand{\proposedmac}{LUCID\xspace}  %% Name of the proposed MAC protocol
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\newcommand{\tps}{\ensuremath{\mathit{TPS}}\xspace}
+
+
+%Algo
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+
+\newcolumntype{L}[1]{>
+{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\ie}{i.e.,\ }
+\newcommand{\eg}{e.g.,\ }
+\newcommand{\vs}{vs.\ }
+\newcommand{\free}{\textsc{free}\xspace}
+\newcommand{\busy}{\textsc{busy}\xspace}
+
+\newcommand{\thtbns}{\ensuremath{TH_\mathit{TBNS}}\xspace}
+\newcommand{\thcount}{\ensuremath{TH_\mathit{count}}\xspace}  
+
+\def\keywords{\vspace{2cm}
+{\noindent\textbf{Keywords\\}\,\relax
+}}
+\def\endkeywords{\par}
+
+% ******************************************************************************
+%%%%% When submitting
+\newboolean{SUBMIT}
+\newboolean{authnotes}
+
+%%%%%-------------------
+\setboolean{SUBMIT}{true} %%%% adis: check here
+%%%%%-------------------
+
+\ifthenelse{\boolean{SUBMIT}}
+{
+\setboolean{authnotes}{false}
+}{
+\setboolean{authnotes}{true}
+}
+
+%%%%% For author notes
+\ifthenelse{\boolean{authnotes}}
+{
+%%%%% if the boolean authnotes is true define the macros AND print a diagonal
+%%%%% draft watermark, to remember they are in
+\newcommand{\ram}[1]{\footnote{{\bf avinash: #1}}}
+\newcommand{\adis}[1]{\footnote{{\bf nacho: #1}}}
+\newcommand{\dirk}[1]{\footnote{{\bf Alan: #1}}}
+\usepackage{draftwatermark}
+\SetWatermarkLightness{0.85}
+}{
+%%%%% otherwise, just define the macros to avoid compilation errors, but ignore
+%%%%% the content of the notes 
+\newcommand{\avinash}[1]{}
+\newcommand{\nacho}[1]{}
+\newcommand{\alan}[1]{}
+\newcommand{\pio}[1]{}
+
+
+}
+
+
+% ******************************************************************************
+\begin{document}
+
+\frontmatter
+
+\begin{titlepage}
+  \maketitle
+\end{titlepage}
+\include{Chapters/declaration}
+\include{Chapters/dedication}
+\include{Chapters/acknowledgement}
+\include{Chapters/abstract} 
+% \include{Chapters/publications}
+
+
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% \printnomenclature[space] space can be set as 2em between symbol and description
+% \printnomenclature[3em]
+
+\include{acronyms}
+
+% ******************************** Main Matter *********************************
+\mainmatter
+
+\include{Chapters/chapter1}
+\include{Chapters/chapter2}
+\include{Chapters/chapter3}
+\include{Chapters/chapter4}
+\include{Chapters/chapter5}
+\include{Chapters/chapter6}
+
+% ********************************** Bibliography ******************************
+\begin{spacing}{0.9}
+
+\bibliographystyle{abbrv}
+
+\cleardoublepage
+\bibliography{appendices/references} % Path to your References.bib file
+
+\end{spacing}
+
+% ********************************** Appendices ********************************
+% \begin{appendices} % Using appendices environment for more functionality
+
+% \include{appendices/appendix1}
+
+% \end{appendices}
+
+% *************************************** Index ********************************
+\printthesisindex % If index is present
+
+\end{document}
